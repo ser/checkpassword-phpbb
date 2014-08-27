@@ -53,6 +53,7 @@ def main():
        os.environ['userdb_uid'] = "999" # adapt it to your needs
        os.environ['userdb_gid'] = "999" # adapt it to your needs
        os.environ['userdb_mail'] = "maildir:~/Maildir" # adapt it to your needs
+       #os.environ['userdb_quota_rule'] = "*:storage=100M" # adapt it to your needs and add to EXTRA environ
        os.environ['INSECURE_SETUID'] = "1"
        os.environ['EXTRA'] = 'userdb_uid userdb_gid userdb_mail'
     os.execvp(sys.argv[1], sys.argv[1:])
