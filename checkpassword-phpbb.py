@@ -43,12 +43,14 @@ def main():
         data = infile.read(512).split('\0')
     username, password = data[:2]
     justuser = username.split("@")[0]
-    domain = username.split("@")[1]
-    print(justuser)
+    try:
+        domain = username.split("@")[1]
+    except:
+        domain = "cia.gov.pl" # default domain, adapt it to your need
     if verifypass(justuser,password) == False:
        return 1 # password does not match, user cannot be authenticated
     else:
-       os.environ['USER'] = justuser
+       os.environ['USER'] = "%s@%s" % (justuser, domain)
        os.environ['HOME'] = "/home/vmail/%s/%s" % (domain, justuser) # adapt it to your needs
        os.environ['userdb_uid'] = "999" # adapt it to your needs
        os.environ['userdb_gid'] = "999" # adapt it to your needs
