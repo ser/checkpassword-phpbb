@@ -25,8 +25,8 @@ config = {
 def verifypass(username,password):
     # Connect to the MySQL Server
     cnx = mysql.connector.connect(**config)
-    # we want to ask mysql for password for particula phpBB user
-    sql = "SELECT user_password AS password FROM phpbb_users WHERE username_clean = '%s'" % username
+    # we want to ask mysql for password for particular phpBB user, 0=normal users, 3=forum owners (1=inactive, 2=bots)
+    sql = "SELECT user_password AS password FROM phpbb_users WHERE username_clean = '%s' AND user_type IN (0,3)" % username
     cursor = cnx.cursor(buffered=True)
     cursor.execute(sql)
     row = cursor.fetchone() # we need one record only
